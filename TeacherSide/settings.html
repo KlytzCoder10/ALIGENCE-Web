@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <script src="settings.js" ></script>
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="sidebar">
+                <center>
+                <div class="logo">
+                    <img src="./ASSETS/light_logo.png">
+                </div>
+                </center>
+                
+                <a href="dashboard.html" class="active1">
+                    <h2>Dashboard</h2>
+                </a>
+                <a href="manage_students.html" class="active2">
+                    <h2>Manage Students</h2>
+                </a>
+                <a href="assessments.html" class="active3">
+                    <h2>Assessments</h2>
+                </a>
+                <a href="monitor_students.html" class="active4">
+                    <h2>Monitor Students</h2>
+                </a>
+                <a href="settings.html" class="active5">
+                    <h2>Settings</h2>
+                </a>
+                <a href="../login.html">
+                    <button class="btn_logout">LOG OUT</button>
+                </a>
+            </div>
+        </aside>
+
+        <div class="form-container">
+            <form class="settings-form">
+                
+                <h2>Change Password</h2>
+                
+                <!-- Email Group -->
+                <div class="email-group">
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="example.12@email.com">
+                    </div>
+                    <div class="input-group">
+                        <button type="button">SEND OTP</button>
+                    </div>
+                    <div class="input-group">
+                        <label>Enter the Code</label>
+                        <input type="text" placeholder="Enter OTP">
+                    </div>
+                    <div class="input-group">
+                        <button type="button">VERIFY</button>
+                    </div>
+                </div>
+
+                <!-- Password Group -->
+                <div class="password-group">
+                    <div class="input-group">
+                        <label>Old Password</label>
+                        <input type="password" placeholder="Enter old password">
+                    </div>
+                    <div class="input-group">
+                        <label>New Password</label>
+                        <input type="password" placeholder="Enter new password">
+                    </div>
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input type="password" placeholder="Confirm new password">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <button type="submit" class="confirm-btn">CONFIRM CHANGES</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

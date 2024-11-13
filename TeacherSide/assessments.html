@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AliGence | Assessment</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="assessments.css">
+    <link rel="stylesheet" href="sidebar.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="sidebar">
+                <center>
+                <div class="logo">
+                    <img src="./ASSETS/light_logo.png">
+                </div>
+                </center>
+                
+                <a href="dashboard.html" class="active1">
+                    <h2>Dashboard</h2>
+                </a>
+                <a href="manage_students.html" class="active2">
+                    <h2>Manage Students</h2>
+                </a>
+                <a href="assessments.html" class="active3">
+                    <h2>Assessments</h2>
+                </a>
+                <a href="monitor_students.html" class="active4">
+                    <h2>Monitor Students</h2>
+                </a>
+                <a href="settings.html" class="active5">
+                    <h2>Settings</h2>
+                </a>
+                <a href="../1aligence.html">
+                    <button class="btn_logout">LOG OUT</button>
+                </a>
+            </div>
+        </aside>
+        
+        <main>
+            <div class="header">
+                <h2>Assessments</h2>
+                <!-- Topic Dropdown -->
+                <div class="dropdown">
+                    <button class="dropbtn" id="topic-btn">Select Topic</button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-content">
+                            <a href="#" onclick="selectTopic('Science is for Every Juan!')">Science is for Every Juan!</a>
+                            <a href="#" onclick="selectTopic('Science at Work')">Science at Work</a>
+                            <a href="#" onclick="selectTopic('Probing Matter')">Probing Matter</a>
+                            <a href="#" onclick="selectTopic('Chemistry of Solutions')">Chemistry of Solutions</a>
+                            <a href="#" onclick="selectTopic('Concentration and Properties of Solutions')">Concentration and Properties of Solutions</a>
+                            <a href="#" onclick="selectTopic('The Discovery of Cells and the Microscopic World')">The Discovery of Cells and the Microscopic World</a>
+                            <a href="#" onclick="selectTopic('The Structure and Function of Cells')">The Structure and Function of Cells</a>
+                            <a href="#" onclick="selectTopic('The Reproduction of Life')">The Reproduction of Life</a>
+                            <a href="#" onclick="selectTopic('Ecosystems and Interdependence')">Ecosystems and Interdependence</a>
+                            <a href="#" onclick="selectTopic('Changes in Ecosystems and Human Impact')">Changes in Ecosystems and Human Impact</a>
+                            <a href="#" onclick="selectTopic('Forces and Motion')">Forces and Motion</a>
+                            <a href="#" onclick="selectTopic('Making Waves')">Making Waves</a>
+                            <a href="#" onclick="selectTopic('Living with Sound and Light')">Living with Sound and Light</a>
+                            <a href="#" onclick="selectTopic('The Heat is On')">The Heat is On</a>
+                            <a href="#" onclick="selectTopic('Give and Take')">Give and Take</a>
+                            <a href="#" onclick="selectTopic('The Philippine Archipelago')">The Philippine Archipelago</a>
+                            <a href="#" onclick="selectTopic('Landforms and Natural Wonders of the Philippines')">Landforms and Natural Wonders of the Philippines</a>
+                            <a href="#" onclick="selectTopic('Natural Resources and Environmental Challenges')">Natural Resources and Environmental Challenges</a>
+                            <a href="#" onclick="selectTopic('The Invisible Blanket')">The Invisible Blanket</a>
+                            <a href="#" onclick="selectTopic('Sun-Earth-Moon System')">Sun-Earth-Moon System</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btnAddEntry" onclick="openAddEntryModal()">Add Entry</button>
+            <button class="btnViewResults" onclick="openResultsModal()">View Results</button>
+
+            <!-- Table header -->
+            <div class="table">
+                <table class="tableUserInp">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Question</th>
+                            <th>Choices</th>
+                            <th>Answer</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-contents"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for adding/editing entries -->
+    <div id="addEntryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddEntryModal()">&times;</span>
+            <form id="form" class="row">
+                <div class="in-question">
+                    <label for="Question">Question:</label>
+                    <input type="text" class="form-control" id="q" placeholder="Enter Question" required>
+                </div>
+                <div class="input-choices">
+                    <label for="Choices">Choices:</label>
+                    <input type="text" placeholder="Option A" name="questionOptionA" id="0" required>
+                    <input type="text" placeholder="Option B" name="questionOptionB" id="1" required>
+                    <input type="text" placeholder="Option C" name="questionOptionC" id="2" required>
+                    <input type="text" placeholder="Option D" name="questionOptionD" id="3" required>
+                </div>
+                <br/>
+                <div class="radio-btn">
+                    <label for="CorrectAnswerIndex">Correct Answer:</label> <br/>
+                    <label><input type="radio" name="questionAnswer" value="A"> Select A</label>
+                    <label><input type="radio" name="questionAnswer" value="B"> Select B</label>
+                    <label><input type="radio" name="questionAnswer" value="C"> Select C</label>
+                    <label><input type="radio" name="questionAnswer" value="D"> Select D</label>
+                </div>
+                <div class="btn">
+                    <button type="button" class="btnSubmit" onclick="submitEntry()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for viewing results -->
+    <div id="viewResultsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeResultsModal()">&times;</span>
+            <h3>Student Results</h3>
+            <table class="tableResults">
+                <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Name</th>
+                        <th>Section</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id="results-table-contents"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="assessments.js"></script>
+</body>
+</html>

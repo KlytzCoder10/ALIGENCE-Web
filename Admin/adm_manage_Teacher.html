@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Teachers | Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="adm_manage_Teacher.css">
+    <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="light_logo.png">
+                </div>
+                <a href="dashboard.html" class="active1">
+                    <h2>Dashboard</h2>
+                </a>
+                <a href="adm_manage_students.html" class="active2">
+                    <h2>Manage Students</h2>
+                </a>
+                <a href="adm_manage_Teacher.html" class="active3">
+                    <h2>Manage Teachers</h2>
+                </a>
+                <a href="adm_ArchivedData.html" class="active4">
+                    <h2>Archived Data</h2>
+                </a>
+                <a href="adm_settings.html" class="active5">
+                    <h2>Settings</h2>
+                </a>
+                <a href="login.html">
+                    <button class="btn_logout">LOG OUT</button>
+                </a>
+            </div>
+        </aside>
+        <!------------------END OF ASIDE--------------------->
+
+        <main>
+            <div class="header">
+                <h1>List of Teachers</h1>
+                <form id="teacher_searchForm">
+                    <div class="search">
+                        <span class="material-symbols-outlined">search</span>
+                        <input class="search-input" type="search" placeholder="Search Here" id="searchInput">
+                    </div>
+                </form>
+            </div>
+            <div>
+                <button id="addTeacherBtn">Add Teacher</button>
+            </div>
+            
+            <table id="teachersTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Teacher ID</th>
+                        <th>Email</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Teacher rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        
+        </main>
+    </div>
+
+    <!-- Modal for Adding/Editing Teachers -->
+    <div id="teachersModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Add Teacher</h2>
+            <form id="teacherForm">
+                <label for="teacherNum">Teacher Number:</label>
+                <input type="text" id="teacherNum" name="teacherNum" required>
+
+                <label for="teacher_Email">Email:</label>
+                <input type="text" id="teacher_Email" name="teacher_mail" required>
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="teacher_lastName" name="teacher_lastName" required>
+                
+                <label for="firstName">First Name:</label>
+                <input type="text" id="teacher_firstName" name="teacher_firstName" required>
+                
+                <button type="submit" id="saveTeacherBtn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="adm_manage_Teacher.js"></script>
+</body>
+</html>

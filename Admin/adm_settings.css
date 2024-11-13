@@ -1,0 +1,144 @@
+:root {
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #C3EEB3;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center; /* Center vertically */
+    padding: 20px 30px; /* Padding around links */
+    color: #ffffff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s;
+}
+
+.sidebar a:last-child {
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+.sidebar a.active5 {
+    background: #C3EEB3;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    color: #1C5A05;
+    margin-left: 0;
+    padding: 1rem 2rem; /* Adjust padding for width and height */
+    font-size: 1.2rem; /* Adjust font size */
+    height: 4rem; /* Set a specific height */
+    width: auto;
+
+}
+.sidebar a:hover {
+    color: #1C5A05;
+}
+
+
+.form-container {
+    border-radius: 20px;
+    padding: 3.5rem;
+    margin: auto;
+    width: 60%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Settings form */
+.settings-form {
+    background-color: #3EC70B;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: #091D02;
+}
+
+.settings-form h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+/* styling */
+.email-group, .password-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    color: white;
+}
+
+.input-group input {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #091D02;
+}
+
+.input-group button {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    background-color: #C3EEB3;
+    color: #1C5A05;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.input-group button:hover {
+    background-color: #1C5A05;
+    color: #C3EEB3;
+}
+
+/* Confirm button */
+.confirm-btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: #C3EEB3;
+    color: #091D02;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 1.5rem;
+}
+
+.confirm-btn:hover {
+    background-color: #1C5A05;
+    color: #C3EEB3;
+}

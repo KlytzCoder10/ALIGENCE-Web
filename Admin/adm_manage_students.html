@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Students | Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="adm_manage_students.css">
+    <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="light_logo.png">
+                </div>
+                <a href="dashboard.html" class="active1">
+                    <h2>Dashboard</h2>
+                </a>
+                <a href="adm_manage_students.html" class="active2">
+                    <h2>Manage Students</h2>
+                </a>
+                <a href="adm_manage_Teacher.html" class="active3">
+                    <h2>Manage Teachers</h2>
+                </a>
+                <a href="adm_ArchivedData.html" class="active4">
+                    <h2>Archived Data</h2>
+                </a>
+                <a href="adm_settings.html" class="active5">
+                    <h2>Settings</h2>
+                </a>
+                <a href="login.html">
+                    <button class="btn_logout">LOG OUT</button>
+                </a>
+            </div>
+        </aside>
+        <!------------------END OF ASIDE--------------------->
+
+        <main>
+            <div class="header">
+                <h2>List of Students</h2>
+                <center>
+                    <div class="dropdown">
+                        <button class="dropbtn" id="sectionButton">
+                            <a id="sectionText">Section</a>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="selectSection('All')">All</a>
+                            <a href="#" onclick="selectSection('Aristotle')">Aristotle</a>
+                            <a href="#" onclick="selectSection('Euclid')">Euclid</a>
+                            <a href="#" onclick="selectSection('Pascal')">Pascal</a>
+                        </div>
+                    </div>
+                </center>
+                <form id="searchForm">
+                    <div class="search">
+                        <span class="material-symbols-outlined">search</span>
+                        <input class="search-input" type="search" placeholder="Search Here" id="searchInput">
+                    </div>
+                </form>
+            </div>
+            <div>
+                <button id="addStudentBtn">Add Student</button>
+            </div>
+            <table id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>LRN</th>
+                        <th>Email</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Section</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Student rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <!-- Modal for Adding/Editing Students -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Add Student</h2>
+
+            <form id="studentForm">
+
+                <label for="studentNum">LRN:</label>
+                <input type="text" id="studentNum" name="studentNum" maxlength="12" inputmode="numeric" required>
+
+                <label for="email">Email: </label>
+                <input type="text" id="email" name="email" required>
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+                
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+                
+                <!-- Dropdown for selecting a section in the modal -->
+                <label for="section">Section:</label>
+                <div class="modal-section-dropdown">
+                    <button type="button" class="modal-section-dropdown-btn" id="modalSectionText">Select Section</button>
+                    <div class="modal-section-dropdown-content">
+                        <a href="#" onclick="selectModalSection('Aristotle')">Aristotle</a>
+                        <a href="#" onclick="selectModalSection('Euclid')">Euclid</a>
+                        <a href="#" onclick="selectModalSection('Pascal')">Pascal</a>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" id="saveStudentBtn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="adm_manage_students.js"></script>
+</body>
+</html>

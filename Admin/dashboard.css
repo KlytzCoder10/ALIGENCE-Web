@@ -1,0 +1,175 @@
+:root {
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #C3EEB3;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center; /* Center vertically */
+    padding: 20px 30px; /* Padding around links */
+    color: #ffffff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s;
+}
+
+.sidebar a:last-child {
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+.sidebar a.active1 {
+    background: #C3EEB3;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    color: #1C5A05;
+    margin-left: 0;
+    padding: 1rem 2rem; /* Adjust padding for width and height */
+    font-size: 1.2rem; /* Adjust font size */
+    height: 4rem; /* Set a specific height */
+    width: auto;
+
+}
+.sidebar a:hover {
+    color: #1C5A05;
+}
+
+/*---------MAIN DASHBOARD---------*/
+main {
+    padding: 1rem;
+    text-align: left;
+    grid-column: 2 / span 1; 
+    margin-top: 2rem;
+}
+
+.top-table {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Change ratio for more width for the chart */
+    gap: 20px;
+    margin-top: 2px;
+    width: 100%; /* Ensure it uses full width of the main section */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.bar-chart {
+    background-color: #F5F5F5;
+    margin-bottom: 20px;
+    padding: 25px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 100%; /* Set width to 100% to fill the container */
+    height: 100%; /* Set height to 100% to fill the container */
+    box-shadow: 0 6px 7px -4px rgb(0, 0, 0, 0.2);
+}
+/* General box styling */
+.box {
+    background-color: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: 70px;
+    width: 20rem;
+    height: 14rem;
+    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #1C5A05;
+    margin-bottom: 20px;
+}
+
+.info-boxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 250px;
+    margin-left: 20px;
+}
+
+.time {
+    color: #1C5A05;
+    font-size: 25px; /* Adjusted font size for time */
+    text-align: center; /* Center text horizontally */
+    display: flex; /* Use flexbox to center vertically */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    height: 100%;
+}
+
+.date {
+    color: #1C5A05;
+    font-size: 25px;
+    text-align: center; /* Center text horizontally */
+    display: flex; /* Use flexbox to center vertically */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    height: 100%;    
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 3rem;
+    
+}
+
+.btn-view-analytics {
+    background-color: #38B30A;
+    color: var(--color-white);
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.btn-view-analytics:hover {
+    background-color: #329F09;
+}
+
+
+.main-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 25px;
+    border-radius: 5px;
+    background-color: #60E130;
+    color: #FFFFFF;
+}
+
+.card-inner {
+    align-items: center;
+    justify-content: space-between;
+}

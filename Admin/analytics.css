@@ -1,0 +1,134 @@
+:root {
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #C3EEB3;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center; /* Center vertically */
+    padding: 20px 30px; /* Padding around links */
+    color: #ffffff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s;
+}
+
+.sidebar a:last-child {
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+.sidebar a.active1 {
+    background: #C3EEB3;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    color: #1C5A05;
+    margin-left: 0;
+    padding: 1rem 2rem; /* Adjust padding for width and height */
+    font-size: 1.2rem; /* Adjust font size */
+    height: 4rem; /* Set a specific height */
+    width: auto;
+
+}
+.sidebar a:hover {
+    color: #1C5A05;
+}
+/*---------MAIN DASHBOARD---------*/
+main {
+    padding: 1rem;
+    text-align: left;
+    grid-column: 2 / span 1; 
+    margin-top: 2rem;
+}
+
+.top-table {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.bar-chart {
+    background-color: #F5F5F5;
+    padding: 25px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 100%; /* Fill available width */
+    height: 400px; /* Adjust height as necessary */
+    position: relative; /* For positioning the button */
+    box-shadow: 0 6px 7px -4px rgb(0, 0, 0, 0.2);
+}
+
+.button-container {
+    position: absolute; /* Position it relative to the bar-chart */
+    right: 20px; /* Adjust to your preference */
+    bottom: 20px; /* Adjust to your preference */
+}
+
+.btn-view-analytics {
+    background-color: #38B30A;
+    color: var(--color-white);
+    font-size: 1rem; /* Make the button text smaller */
+    font-weight: bold;
+    padding: 10px 20px; /* Adjust button padding for size */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.btn-view-analytics:hover {
+    background-color: #329F09;
+}
+
+
+.main-cards {
+    display:flex;
+    position: absolute;
+    
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 25px;
+    border-radius: 5px;
+    background-color: #60E130;
+    color: #FFFFFF;
+}
+
+.card-inner {
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+/* --------- MEDIA QUERIES ----------- */
+
+
+/* Add this CSS to your existing style.css */
