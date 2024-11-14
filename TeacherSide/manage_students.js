@@ -303,5 +303,15 @@ function initializePage() {
     renderTable();  // or renderMonitorTable() depending on context
 }
 
+function logout() {
+    // Firebase sign-out
+    firebase.auth().signOut().then(() => {
+        // Redirect to login page after successful logout
+        window.location.href = '../login.html';
+    }).catch((error) => {
+        console.error('Error during logout:', error);
+    });
+}
+
 // Run the initializePage function on load
 window.onload = initializePage;

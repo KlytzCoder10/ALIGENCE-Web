@@ -29,6 +29,35 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        @keyframes moveUpDown {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        #aligenceImage {
+            animation: moveUpDown 2s ease-in-out infinite;
+        }
+
+        .shadow-ali {
+            animation: moveUpDown 2s ease-in-out infinite;
+            box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.5);  /* Green glow shadow */
+        }
+
+        p.mb-4 {
+            text-align: justify;
+        }
+        
+    </style>
+    
 </head>
 
 <body>
@@ -109,23 +138,23 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="section-title position-relative mb-4 pb-4">
-                            <h1 class="mb-2">Welcome To Aligence</h1>
+                            <h1 class="mb-2">Welcome To ALIGENCE</h1>
                             <p>Your Intergalactic Guide to Knowledge!</p>
                         </div>
-                        <p class="mb-4">Welcome to AliGence, where learning science is exciting and fun! AliGence is made just for Grade 7 students at Malabon City National Science and Mathematics High School, blending cool technology with hands-on activities. With the help of our friendly alien teacher, Ali, and an AI-powered chatbot, science topics come to life like never before. Get ready to explore, discover, and learn in a whole new way!</p>
+                        <p class="mb-4">Welcome to ALIGENCE, where learning science is exciting and fun! AliGence is made just for Grade 7 students at Malabon City National Science and Mathematics High School, blending cool technology with hands-on activities. With the help of our friendly alien teacher, Ali, and an AI-powered chatbot, science topics come to life like never before. Get ready to explore, discover, and learn in a whole new way!</p>
                         <div class="row g-3">
                             <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.1s">
                                 <h1 class="mb-2">Our Mission</h1>
                                 <p class="mb-4">Our mission is to make science accessible, engaging, and personalized. Through interactive lessons and an AI-guided experience, AliGence helps students grasp complex concepts with ease, allowing every learner to progress at their own pace. By shifting mobile device usage from distraction to education, AliGence fosters curiosity and learning within a fun, game-like environment.</p>
                             </div>
                             <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
-                                <h1 class="mb-2">Why AliGence?</h1>
-                                <p class="mb-4">AliGence was created to address the unique challenges of science education. Traditional methods sometimes fall short of capturing student interest or adapting to their varied levels of understanding. AliGence’s AI chatbot offers a personalized approach, providing guidance and support tailored to each student’s learning journey. Our virtual pet simulation keeps students engaged, turning science exploration into an interactive adventure.</p>
+                                <h1 class="mb-2">Why ALIGENCE?</h1>
+                                <p class="mb-4">AliGence was created to address the unique challenges of science education. Traditional methods sometimes fall short of capturing student interest or adapting to their varied levels of understanding. AliGence’s AI chatbot offers a personalized approach, providing guidance and support tailored to each student’s learning journey. Our friendly alien, Ali keeps students engaged, turning science exploration into an interactive adventure.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5">
-                        <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/racket (2).png">
+                        <img id="aligenceImage" class="img-fluid animated zoomIn" src="img/aligence.png" alt="Aligence Image">
                     </div>
                 </div>
             </div>

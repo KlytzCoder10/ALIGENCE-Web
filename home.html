@@ -29,6 +29,29 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        @keyframes moveUpDown {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        #aligenceImage {
+            animation: moveUpDown 2s ease-in-out infinite;
+        }
+
+        .shadow-ali {
+            animation: moveUpDown 2s ease-in-out infinite;
+            box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.5);  /* Green glow shadow */
+        }
+    </style>
 </head>
 
 <body>
@@ -72,10 +95,10 @@
                             <h4 class="text-white animated slideInLeft">Learning application offering Grade 7 students a exciting way to learn Science.</h4>
                             <h1 class="text-white mb-4 animated slideInLeft">
                             </h1>
-                            <a href="ALIGENCE (Demo).apk" class="btn btn-secondary py-sm-3 px-sm-5 me-3 animated slideInLeft" download>DOWNLOAD NOW</a>
+                            <a href="https://caloocansti-my.sharepoint.com/:u:/g/personal/fajardo_259668_caloocan_sti_edu_ph/EXRASTfaNt5JoCtJ7vdP5BgBYryDUbLyM3lxBHrlUl542w?e=nhxq1a" class="btn btn-secondary py-sm-3 px-sm-5 me-3 animated slideInLeft" download>DOWNLOAD NOW</a>
                         </div>
                         <div class="col-lg-6 text-center text-lg-start">
-                            <img class="img-fluid animated zoomIn" src="img/racket (2).png" alt="">
+                            <img id="aligenceImage" class="img-fluid animated zoomIn" src="img/aligence.png" alt="Aligence Image">
                         </div>
                     </div>
                 </div>
@@ -121,7 +144,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5">
-                        <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/science (8).png">
+                        <img id="aligenceImage" class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/science (8).png ">
                     </div>
                 </div>
             </div>
@@ -134,7 +157,7 @@
             <div class="container px-lg-5">
                 <div class="section-title position-relative text-center mx-auto mb-5 pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                     <h1 class="mb-3">App Learning</h1>
-                    <h5 class="mb-1">“Explore new worlds of knowledge with the Aligence app! Guided by your ali friend Aligence</h5>
+                    <h5 class="mb-1">“Explore new worlds of knowledge with the Aligence app! Guided by your alien friend, Ali with ALIGENCE</h5>
                 </div>
                 <div class="row gy-5 gx-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
@@ -143,7 +166,7 @@
                                 <!-- <i class="fa fa-share-alt text-white"></i> -->
                             </div>
                             <div class="text-center border-bottom p-4 pt-5">
-                                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/homepage.jpg"> 
+                                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/homepage.png"> 
                             </div>
                             
             
@@ -155,7 +178,7 @@
                                 <!-- <i class="fa fa-server text-white"></i> -->
                             </div>
                             <div class="text-center border-bottom p-4 pt-5">
-                                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/learn-mode.jpg">
+                                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/learn-mode.png">
                             </div>
                             
                             
@@ -167,7 +190,7 @@
                                 <!-- <i class="fa fa-cog text-white"></i> -->
                             </div>
                             <div class="text-center border-bottom p-4 pt-5">
-                                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/ai-chatbot.jpg">
+                                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="img/ai-chatbot.png">
                             </div>
                         </div>
                     </div>

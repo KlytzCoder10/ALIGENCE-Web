@@ -228,6 +228,15 @@ function fetchDataForBarChart() {
       console.error("Error fetching data for bar chart:", error);
   });
 }
+function logout() {
+    // Firebase sign-out
+    firebase.auth().signOut().then(() => {
+        // Redirect to login page after successful logout
+        window.location.href = '../login.html';
+    }).catch((error) => {
+        console.error('Error during logout:', error);
+    });
+}
 
 
 // Initialize Time and Date update

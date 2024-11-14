@@ -31,6 +31,7 @@ function selectStatus(status) {
 }
 
 // Function to render the students table
+// Function to render the students table
 function renderTable() {
     const tableBody = document.querySelector('#studentsTable tbody');
     tableBody.innerHTML = ""; // Clear previous data
@@ -42,7 +43,7 @@ function renderTable() {
                 return;
             }
 
-            let index = 1;
+            let students = [];
             snapshot.forEach((childSnapshot) => {
                 const student = childSnapshot.val();
 
@@ -56,6 +57,14 @@ function renderTable() {
                     return;
                 }
 
+                students.push(student);
+            });
+
+            // Sort students by last name alphabetically
+            students.sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+            let index = 1;
+            students.forEach((student) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${index++}</td>
@@ -72,6 +81,7 @@ function renderTable() {
             tableBody.innerHTML = "<tr><td colspan='5'>Error loading data.</td></tr>";
         });
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("searchInput");
@@ -102,6 +112,15 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 })
+function logout() {
+    // Firebase sign-out
+    firebase.auth().signOut().then(() => {
+        // Redirect to login page after successful logout
+        window.location.href = '../login.html';
+    }).catch((error) => {
+        console.error('Error during logout:', error);
+    });
+}
 
 // Initialize the page and render the table on load
 window.onload = renderTable;

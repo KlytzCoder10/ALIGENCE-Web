@@ -36,3 +36,13 @@ document.getElementById('passwordForm').addEventListener('submit', function(even
         alert("New Password and Confirm Password do not match.");
     }
 });
+
+function logout() {
+    // Firebase sign-out
+    firebase.auth().signOut().then(() => {
+        // Redirect to login page after successful logout
+        window.location.href = '../login.html';
+    }).catch((error) => {
+        console.error('Error during logout:', error);
+    });
+}

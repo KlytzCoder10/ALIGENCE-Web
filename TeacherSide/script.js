@@ -92,5 +92,15 @@ function updateTimeAndDate() {
   document.getElementById('date').textContent = dateString;
 }
 
+function logout() {
+  // Firebase sign-out
+  firebase.auth().signOut().then(() => {
+      // Redirect to login page after successful logout
+      window.location.href = '../login.html';
+  }).catch((error) => {
+      console.error('Error during logout:', error);
+  });
+}
+
 updateTimeAndDate();
 setInterval(updateTimeAndDate, 1000);
