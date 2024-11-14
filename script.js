@@ -5,7 +5,7 @@ toggleButton.addEventListener('click', () => {
   navbarLinks.classList.toggle('active')
 })
 
-// Check if the user is signed in when the page loads
+//Check if the user is signed in when the page loads
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) {
       // Redirect the user to the login page if they are not logged in

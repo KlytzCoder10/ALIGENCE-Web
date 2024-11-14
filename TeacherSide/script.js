@@ -102,5 +102,20 @@ function logout() {
   });
 }
 
+// Responsive Sidebar
+// Toggle sidebar visibility on smaller screens
+document.addEventListener("DOMContentLoaded", function() {
+    const menuButton = document.querySelector('.menu');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (menuButton && sidebar) {
+        menuButton.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+    }
+});
+
+
+
 updateTimeAndDate();
 setInterval(updateTimeAndDate, 1000);

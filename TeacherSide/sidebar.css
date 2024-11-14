@@ -1,4 +1,5 @@
-*{
+/* Global Reset */
+* {
     margin: 0;
     padding: 0;
     outline: 0;
@@ -9,7 +10,7 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     font-size: 14px;
 }
 
@@ -18,7 +19,7 @@ html{
     src: url(../Fonts/worksans.ttf);
 }
 
-body{
+body {
     width: 100vw;
     height: 100vh;
     font-family: 'WorkSans';
@@ -38,37 +39,37 @@ body{
     text-align: center;
 }
 
-a{
+a {
     color: var(--color-dark);
 }
 
 img {
     display: block;
-    width: 70%; 
+    width: 70%;
 }
 
-h1{
+h1 {
     font-weight: 800;
     font-size: 1.8rem;
 }
 
-h2{
+h2 {
     font-size: 1.4rem;
 }
 
-h3{
+h3 {
     font-size: 0.87rem;
 }
 
-h4{
+h4 {
     font-size: 0.8rem;
 }
 
-h5{
+h5 {
     font-size: 0.77rem;
 }
 
-small{
+small {
     font-size: 0.75rem;
 }
 
@@ -76,30 +77,29 @@ small{
     color: var(--color-info-dark);
 }
 
-p{
+p {
     color: var(--color-dark-variant);
 }
 
-b{
+b {
     color: var(--color-dark);
 }
 
-.primary{
+.primary {
     color: var(--color-primary);
 }
 
-.danger{
+.danger {
     color: var(--color-danger);
 }
 
-.success{
+.success {
     color: var(--color-success);
 }
 
-.warning{
+.warning {
     color: var(--color-warning);
 }
-
 
 .logo {
     display: flex;
@@ -112,17 +112,11 @@ b{
     width: 15rem;
 }
 
-.menu {
-    color: var(--color-white);
-    display: none;
-}
-
 .btn_logout {
     width: 220px;
     height: 35px;
     font-family: 'WorkSans';
     font-size: 20px;
-    font-weight: none;
     border-radius: 10px;
     color: #ffffff;
     background-color: #329F09;
@@ -131,17 +125,53 @@ b{
     margin-right: 2.5rem;
 }
 
-/* ===============SIDEBAR=============*/
+/* Menu Button */
+.menu {
+    display: none; /* Hidden by default on larger screens */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 2rem;
+    background-color: transparent;
+    color: #3EC70B; /* Same as sidebar color or complementary */
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* =============== SIDEBAR ============= */
 
 .sidebar {
     height: 100%;
-    width: 48vh;
+    width: 20rem;
     background: #3EC70B;
-    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-x: hidden;
     position: fixed;
     padding-top: 20px;
+    transition: width 0.3s ease; /* Smooth transition for width */
 }
 
-h3 {
-    font-weight: 500;
+/* Sidebar toggle class for mobile */
+.sidebar.active {
+    width: 15rem; /* Sidebar width when open on mobile */
+}
+
+/* =============== RESPONSIVE ============= */
+
+@media (max-width: 768px) {
+    /* Grid layout adjustment */
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Hide sidebar by default on mobile */
+    .sidebar {
+        width: 0;
+        overflow: hidden;
+    }
+
+    /* Show menu button on mobile */
+    .menu {
+        display: block;
+    }
 }
