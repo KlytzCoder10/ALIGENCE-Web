@@ -339,12 +339,12 @@ fetchStudentsData();
 
 
 // Check if the user is signed in when the page loads
-firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-        // Redirect the user to the login page if they are not logged in
-        window.location.href = '../login.html';
-    }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//     if (!user) {
+//         // Redirect the user to the login page if they are not logged in
+//         window.location.href = '../login.html';
+//     }
+// });
 
 function logout() {
     // Firebase sign-out
@@ -359,8 +359,20 @@ function logout() {
     });
 }
 
-firebase.auth().signOut().then(() => {
-    window.location.replace('../login.html');  // This prevents using the back button
-}).catch((error) => {
-    console.error('Error during logout:', error);
-});
+// firebase.auth().signOut().then(() => {
+//     window.location.replace('../login.html');  // This prevents using the back button
+// }).catch((error) => {
+//     console.error('Error during logout:', error);
+// });
+
+// Update table when a section is selected
+function selectSection(section) {
+    document.getElementById('sectionText').textContent = section;
+    fetchDataForBarChart(section);
+    fetchStudentsData(section);
+}
+
+// Initial load for 'All' section
+fetchStudentsData();
+
+

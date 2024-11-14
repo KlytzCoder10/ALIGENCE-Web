@@ -12,15 +12,43 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const dbRef = firebase.database().ref("quiz_questions");
+const database = firebase.database();
 
 let currentTopic = "";
 
 // Function to select a topic and load questions
+// function selectTopic(topic) {
+//     currentTopic = topic;
+//     document.getElementById("topic-btn").innerText = topic;
+//     loadQuestions();
+// }
+
+// Example: set currentTopic before calling loadResults()
+// function selectTopic(topic) {
+//     if (!topic) {
+//         console.error("Error: Topic is undefined.");
+//         return;
+//     }
+//     currentTopic = topic;
+//     document.getElementById("topic-btn").innerText = topic;
+//     loadQuestions();
+//     console.log("Selected Topic:", selectedTopic);  // Add this line for debugging
+//     loadResults(currentTopic); // Ensuring the selected topic is passed
+// }
+
 function selectTopic(topic) {
-    currentTopic = topic;
+    if (!topic) {
+        console.error("Error: Topic is undefined.");
+        return;
+    }
+    
+    currentTopic = topic;  // Set currentTopic
     document.getElementById("topic-btn").innerText = topic;
     loadQuestions();
+    console.log("Selected Topic:", currentTopic);  // Add this line for debugging
+    loadResults();  // Call loadResults without passing currentTopic if it's global
 }
+
 
 // Function to load questions based on the selected topic
 function loadQuestions() {
@@ -38,8 +66,8 @@ function loadQuestions() {
                 <td>${questionData.options.join(", ")}</td>
                 <td>${questionData.options[questionData.correctAnswerIndex]}</td>
                 <td>
-                    <button onclick="editEntry('${childSnapshot.key}')">Edit</button>
-                    <button onclick="deleteEntry('${childSnapshot.key}')">Delete</button>
+                    <button onclick="editEntry('${childSnapshot.key}')">✏️</button>
+                    <button onclick="deleteEntry('${childSnapshot.key}')">🗑️</button>
                 </td>`;
             tableContents.appendChild(row);
         });
@@ -47,12 +75,30 @@ function loadQuestions() {
 }
 
 // Function to open the "Add Entry" modal
+function openResultsModal() {
+    document.getElementById("viewResultsModal").style.display = "block";
+    loadResults(currentTopic);  // Make sure the current topic is passed to loadResults
+}
+
+function closeResultsModal() {
+    // Logic to close the modal
+    console.log("Closing results modal...");
+    // Close modal code, for example:
+    document.getElementById("viewResultsModal").style.display = "none";
+}
+
+
+
+// Function to close the "Add Entry" modal
 function openAddEntryModal() {
+    if (currentTopic == '') {
+        console.error("Error: Topic is undefined.");
+        return;
+    }
     resetForm(); // Reset form before opening the modal
     document.getElementById("addEntryModal").style.display = "block";
 }
 
-// Function to close the "Add Entry" modal
 function closeAddEntryModal() {
     document.getElementById("addEntryModal").style.display = "none";
     resetForm();
@@ -161,37 +207,71 @@ function resetForm() {
     radioButtons.forEach(button => button.checked = false);
 }
 
-// Function to open the "View Results" modal
-function openResultsModal() {
-    document.getElementById("viewResultsModal").style.display = "block";
-    loadResults();
-}
-
-// Function to close the "View Results" modal
-function closeResultsModal() {
-    document.getElementById("viewResultsModal").style.display = "none";
-}
-
-// Function to load student results from Firebase
+// Function to reset the form for adding/editing questions
 function loadResults() {
+    if (!currentTopic) {
+        console.error("Selected topic is not defined.");
+        return;
+    }
+
+    console.log("Fetching results for topic:", currentTopic);  // Debugging line
+
     const resultsTableContents = document.getElementById("results-table-contents");
-    resultsTableContents.innerHTML = ""; // Clear previous results
+    resultsTableContents.innerHTML = '';  // Clear previous results
 
-    const resultsRef = firebase.database().ref("student_results"); // Assuming the results are stored under "student_results"
+    database.ref("score_gradedQuiz") // Reference to the root of score_gradedQuiz
+        .once("value")
+        .then(snapshot => {
+            if (snapshot.exists()) {
+                console.log("Results found:", snapshot.val());  // Debugging line
 
-    resultsRef.once("value", snapshot => {
-        snapshot.forEach(childSnapshot => {
-            const resultData = childSnapshot.val();
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${resultData.studentNumber}</td>
-                <td>${resultData.name}</td>
-                <td>${resultData.section}</td>
-                <td>${resultData.score}</td>
-            `;
-            resultsTableContents.appendChild(row);
+                snapshot.forEach(childSnapshot => {
+                    // Loop through each User UID node
+                    const userResults = childSnapshot.val(); // User's results
+                    // Check if the topic is part of the user's results
+                    if (userResults[currentTopic]) {
+                        const resultData = userResults[currentTopic];
+
+                        // Only proceed if the status is "completed"
+                        if (resultData.status === "completed") {
+                            const uid = childSnapshot.key; // User ID (UID)
+                            database.ref(`users/${uid}`).once("value").then(userSnapshot => {
+                                const userData = userSnapshot.val();
+                                if (userData) {
+                                    // Extract user information
+                                    const studentNumber = userData.studentNum || "N/A";
+                                    const lastName = userData.lastName || "N/A";
+                                    const firstName = userData.firstName || "N/A";
+                                    const section = userData.section || "N/A";
+                                    const score = resultData.score;
+
+                                    // Create a table row for the result
+                                    const row = document.createElement("tr");
+                                    row.innerHTML = `
+                                        <td>${studentNumber}</td>
+                                        <td>${lastName}</td>
+                                        <td>${firstName}</td>
+                                        <td>${section}</td>
+                                        <td>${score}</td>
+                                    `;
+                                    resultsTableContents.appendChild(row);
+                                } else {
+                                    console.warn(`User data for UID ${uid} not found.`);
+                                }
+                            }).catch(error => {
+                                console.error("Error fetching user data:", error);
+                            });
+                        }
+                    }
+                });
+            } else {
+                console.log("No results found for the selected topic.");
+                resultsTableContents.innerHTML = "<tr><td colspan='5'>No results found.</td></tr>";
+            }
+        })
+        .catch(error => {
+            console.error("Error loading results:", error);
         });
-    });
 }
 
 function logout() {
