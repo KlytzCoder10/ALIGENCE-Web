@@ -170,6 +170,26 @@ body {
     padding: 8px 16px;
     margin: 5px;}
 
+    .input-group {
+        position: relative;
+    }
+    .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .password-container input[type="password"],
+    .password-container input[type="text"] {
+        width: 100%;
+        padding-right: 30px; /* Space for the icon */
+    }
+    .password-container i {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        color: #888;
+    }
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     .login-container {
