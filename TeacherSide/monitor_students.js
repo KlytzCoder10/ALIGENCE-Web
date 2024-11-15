@@ -30,8 +30,7 @@ function selectStatus(status) {
     renderTable();
 }
 
-// Function to render the students table
-// Function to render the students table
+// Function to render the students table with status indicator
 function renderTable() {
     const tableBody = document.querySelector('#studentsTable tbody');
     tableBody.innerHTML = ""; // Clear previous data
@@ -66,12 +65,19 @@ function renderTable() {
             let index = 1;
             students.forEach((student) => {
                 const row = document.createElement('tr');
+                
+                // Determine status class for the status circle
+                const statusClass = student.status === "Online" ? "status-online" : 
+                                    student.status === "Offline" ? "status-offline" : "status-disconnected";
+
                 row.innerHTML = `
                     <td>${index++}</td>
                     <td>${student.lastName}</td>
                     <td>${student.firstName}</td>
                     <td>${student.section}</td>
-                    <td>${student.status}</td>
+                    <td>
+                        <span class="status-circle ${statusClass}"></span> ${student.status}
+                    </td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -81,7 +87,6 @@ function renderTable() {
             tableBody.innerHTML = "<tr><td colspan='5'>Error loading data.</td></tr>";
         });
 }
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("searchInput");
@@ -111,7 +116,8 @@ document.addEventListener("DOMContentLoaded", function() {
             row.style.display = matches ? "" : "none";
         });
     }
-})
+});
+
 function logout() {
     // Firebase sign-out
     firebase.auth().signOut().then(() => {
