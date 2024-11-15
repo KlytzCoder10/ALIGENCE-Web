@@ -73,6 +73,32 @@
                     </div>
                 </div>
             </div>
+            <!-- Status Dropdown -->
+            <div class="dropdown">
+                <button class="dropbtn" id="statusButton">
+                  <a id="statusText">Status</a>
+                </button>
+                <div class="dropdown-content">
+                  <a href="#" onclick="selectStatus('All')">All</a>
+                  <a href="#" onclick="selectStatus('Online')">Online</a>
+                  <a href="#" onclick="selectStatus('Offline')">Offline</a>
+                </div>
+              </div>              
+            <table id="offlineUsersTable">
+                <thead>
+                  <tr>
+                    <th>Student Number</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Section</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="offlineUsersTableBody">
+                  <!-- Rows will be dynamically added here -->
+                </tbody>
+              </table>
+              
         </main>
     </div>
     <!---------ApexCharts-------->

@@ -76,6 +76,33 @@ main {
     cursor: pointer;
 }
 
+.dropdown a {
+    display: block;
+    color: #C3EEB3;
+    text-decoration: none;
+    word-spacing: 2px;
+    font-size: 13px;
+}
+
+.dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #3EC70B;
+    min-width: 100px;
+    box-shadow: 2px 2px 5px rgba(28, 90, 5, 0.8);
+    z-index: 9999; /* Ensure it's on top of other content */
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown .dropdown-content a:hover {
+    width: 100%;
+    background-color: #C3EEB3; 
+    color: #1C5A05;
+}
 
 .top-table {
     display: flex;
@@ -123,7 +150,7 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    margin: 20px 0;
+    margin: 5px 0;
 }
 
 .card {

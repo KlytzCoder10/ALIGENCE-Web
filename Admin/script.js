@@ -215,6 +215,15 @@ function fetchDataForBarChart() {
   });
 }
 
+let selectedStatus = 'All'; // Default status filter
+
+function selectStatus(status) {
+  selectedStatus = status; // Update the global status filter
+  document.getElementById("statusText").innerText = status; // Update the dropdown button text
+  displayOfflineUsers(); // Refresh the table based on the new filter
+}
+
+
 
 // TIME AND DATE
 
@@ -240,6 +249,45 @@ function updateTimeAndDate() {
   document.getElementById('date').textContent = dateString;
 }
 
+function displayOfflineUsers() {
+  const usersRef = database.ref('/users');
+  const tableBody = document.getElementById("offlineUsersTableBody"); // Reference to the table body
+  
+  usersRef.on('value', snapshot => {
+    tableBody.innerHTML = ''; // Clear the table first
+    
+    snapshot.forEach(childSnapshot => {
+      const role = childSnapshot.child('role').val(); // Get the role of the user
+      const status = childSnapshot.child('status').val();
+      const studNum = childSnapshot.child('studentNum').val();
+      const lastName = childSnapshot.child('lastName').val();
+      const firstName = childSnapshot.child('firstName').val();
+      const section = childSnapshot.child('section').val();
+
+      // Apply filtering: role must be "student", exclude "Disconnected", and match the selected status
+      if (
+        role === "student" &&
+        status !== "Disconnected" &&
+        (selectedStatus === "All" || status === selectedStatus)
+      ) {
+        // Create a new table row
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${studNum || 'N/A'}</td>
+          <td>${lastName || 'N/A'}</td>
+          <td>${firstName || 'N/A'}</td>
+          <td>${section || 'N/A'}</td>
+          <td>${status || 'N/A'}</td>
+        `;
+        
+        tableBody.appendChild(row);
+      }
+    });
+  });
+}
+
+
+displayOfflineUsers();
 fetchStudentCount();
 fetchTeacherCount();
 fetchOnlineUserCount();
