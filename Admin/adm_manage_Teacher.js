@@ -210,3 +210,20 @@ window.addEventListener('click', (event) => {
 
 // Initial table render on page load
 window.onload = renderTable;
+
+// prevent navigating back to previous page
+
+window.history.pushState(null, null, window.location.dashboard.html);
+window.onpopstate = function () {
+    window.history.go(1);
+};
+
+function logout() {
+    // Firebase sign-out
+    firebase.auth().signOut().then(() => {
+        // Redirect to login page after successful logout
+        window.location.href = '../login.html';
+    }).catch((error) => {
+        console.error('Error during logout:', error);
+    });
+}

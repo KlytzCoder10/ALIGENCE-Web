@@ -244,6 +244,7 @@ td {
 }
 .modal-section-dropdown-content a:hover {
     background-color: #f1f1f1;
+    
 }
 .modal-section-dropdown:hover .modal-section-dropdown-content {
     display: block;

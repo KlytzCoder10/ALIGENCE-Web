@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Analytics | Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <link rel="stylesheet" href="./analytics.css">
     <link rel="stylesheet" href="sidebar.css">
 </head>
@@ -31,7 +34,7 @@
                 <a href="adm_settings.html" class="active5">
                     <h2>Settings</h2>
                 </a>
-                <a href="login.html">
+                <a href="login.html" onclick="logout()">
                     <button class="btn_logout">LOG OUT</button>
                 </a>
             </div>
@@ -50,23 +53,22 @@
                 <div class="main-cards">
                     <div class="card">
                         <div class="card-inner">
-                            <h2>Total Studying Time</h2>
-                            <h1>27</h1>
-                            <h2>hrs</h2>
+                            <h2>Total Online Users</h2>
+                            <h1 id="onlineUserCount">Loading...</h1> 
                         </div>
                     </div>
     
                     <div class="card">
                         <div class="card-inner">
-                            <h2>Total Completed Lessons</h2>
-                            <h1>38</h1>
+                            <h2>No of Students</h2>
+                            <h1 id="userCount">Loading..</h1>
                         </div>
                     </div>
     
                     <div class="card">
                         <div class="card-inner">
-                            <h2>No. of Students</h2>
-                            <h1>65</h1>
+                            <h2>No. of Teachers</h2>
+                            <h1 id="teacherCount">Loading...</h1>
                         </div>
                     </div>
                 </div>
@@ -76,6 +78,6 @@
     <!---------ApexCharts-------->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.53.0/apexcharts.min.js"></script>
     <!---------Custom JS-------->
-    <script src="dashboard.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
