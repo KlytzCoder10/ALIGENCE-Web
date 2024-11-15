@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AliGence | Assessment</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <link rel="stylesheet" href="assessments.css">
@@ -129,11 +131,14 @@
     </div>
 
     <!-- Modal for viewing results -->
-    <div id="viewResultsModal" class="modal">
+    <div id="viewResultsModal" class="modal">        
         <div class="modal-content">
-            <span class="close" onclick="closeResultsModal()">&times;</span>
             <h3>Student Results</h3>
-            <table class="tableResults">
+            <button onclick="exportTableToExcel('tableResults', 'scores_GradedQuiz')" class="export-btn">
+                <i class="fa fa-file-export"></i>
+            </button>             
+            <span class="close" onclick="closeResultsModal()">&times;</span>         
+            <table class="tableResults" id="tableResults">
                 <thead>
                     <tr>
                         <th>Student Number</th>
@@ -144,7 +149,7 @@
                     </tr>
                 </thead>
                 <tbody id="results-table-contents"></tbody>
-            </table>
+            </table>            
         </div>
     </div>
 

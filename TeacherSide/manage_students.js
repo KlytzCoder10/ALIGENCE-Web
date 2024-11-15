@@ -313,5 +313,54 @@ function logout() {
     });
 }
 
+// //EXPORT TO EXCEL
+// function exportTableToExcel(tableId, filename = 'excel_data') {
+//     const table = document.getElementById(tableId);
+//     const cloneTable = table.cloneNode(true);
+//     const actionColumn = cloneTable.querySelectorAll('th:last-child, td:last-child');
+//     actionColumn.forEach(cell => cell.remove());
+//     const workbook = XLSX.utils.table_to_book(cloneTable, { sheet: "Sheet 1" });
+//     XLSX.writeFile(workbook, `${filename}.xlsx`);
+//   }
+  
+
+function exportTableToExcel(tableId, filename = 'list_Students') {
+    const table = document.getElementById(tableId);
+    const rows = table.querySelectorAll('tr');
+    
+    const data = [];
+    
+    // Loop through each row (skipping the header row)
+    rows.forEach((row, rowIndex) => {
+      const rowData = [];
+      const cells = row.querySelectorAll('th, td');
+      
+      cells.forEach((cell, cellIndex) => {
+        // Skip the last column (Action column) by checking if it's the last column
+        if (cellIndex !== cells.length - 1) {
+          if (cellIndex === 1) { // LRN column (2nd column)
+            rowData.push(`'${cell.textContent.trim()}`); // Add single quote to treat as string
+          } else {
+            rowData.push(cell.textContent.trim());
+          }
+        }
+      });
+      
+      // Skip the header row
+      if (rowIndex !== 0) {
+        data.push(rowData);
+      }
+    });
+  
+    // Create a new workbook
+    const ws = XLSX.utils.aoa_to_sheet([["#","LRN","Last Name","First Name","Section","Email"], ...data]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Students");
+  
+    // Write the file
+    XLSX.writeFile(wb, `${filename}.xlsx`);
+  }
+  
+
 // Run the initializePage function on load
 window.onload = initializePage;

@@ -274,6 +274,17 @@ function loadResults() {
         });
 }
 
+//EXPORT TO EXCEL
+function exportTableToExcel(tableId, filename = 'excel_data') {
+    // Get the table element by ID
+    const table = document.getElementById(tableId);
+    const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
+    // Use XLSX to write the workbook to a binary string
+    XLSX.writeFile(workbook, `${filename}.xlsx`);
+}
+
+
+
 function logout() {
     // Firebase sign-out
     firebase.auth().signOut().then(() => {

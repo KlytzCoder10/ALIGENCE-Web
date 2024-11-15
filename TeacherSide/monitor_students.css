@@ -192,6 +192,7 @@ button:hover {
     }
 }
 
+/*---------status color---------*/
 .status-circle {
     display: inline-block;
     width: 10px;
@@ -209,4 +210,21 @@ button:hover {
 .status-disconnected {
     background-color: red;
 }
+
+/*---------export excel---------*/
+.export-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+    border-radius: 50px;
+}
+
+.export-btn:hover {
+    background-color: #45a049;
+}
+
 
