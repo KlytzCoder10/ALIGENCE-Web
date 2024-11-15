@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'WorkSans';
+    src: url(../Fonts/worksans.ttf);
+}
+
+
 :root {
     --color-primary: #7380ec;
     --color-danger: #ff7782;
@@ -48,19 +54,20 @@
     font-size: 1.2rem; /* Adjust font size */
     height: 4rem; /* Set a specific height */
     width: auto;
-
 }
 .sidebar a:hover {
     color: #1C5A05;
 }
 
+/* -- SETTINGS CONTENT -- */
 
 .form-container {
+    width: 60%;
+    height: 80vh;
+    padding-top: 30px ;
     border-radius: 20px;
     padding: 3.5rem;
     margin: auto;
-    width: 60%;
-    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,6 +75,9 @@
 
 /* Settings form */
 .settings-form {
+    align-items: center;
+    margin-top: 130px;
+    display:block;
     background-color: #3EC70B;
     border-radius: 10px;
     padding: 2rem;
@@ -77,14 +87,16 @@
     color: #091D02;
 }
 
-.settings-form h1 {
-    font-size: 1.8rem;
+.settings-form h2 {
+    font-size: 2rem; /* Ensure this is large enough */
     margin-bottom: 1.5rem;
-    color: white;
+    color: #ffffff; /* Ensure high contrast against background */
+    z-index: 1; /* Add this if any overlapping is suspected */
 }
 
+
 /* styling */
-.email-group, .password-group {
+.user-info, .password-group {
     margin-bottom: 1.5rem;
 }
 
@@ -127,18 +139,136 @@
 /* Confirm button */
 .confirm-btn {
     width: 100%;
-    padding: 0.8rem;
-    font-size: 1rem;
-    background-color: #C3EEB3;
-    color: #091D02;
+    padding: 0.5rem; /* Adjust padding to match .input-group button */
+    font-size: 0.9rem; /* Adjust font size */
+    background-color: var(--color-background); /* Use background color from your theme */
+    color: var(--color-primary); /* Text color to match your design */
     border: none;
-    border-radius: 8px;
+    border-radius: 5px; /* Matching border-radius with .input-group button */
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, color 0.3s; /* Smooth hover effect transition */
     margin-top: 1.5rem;
+    font-family: 'WorkSans', sans-serif; /* Use the same font family */
 }
 
 .confirm-btn:hover {
-    background-color: #1C5A05;
-    color: #C3EEB3;
+    background-color: var(--color-primary); /* Hover background color */
+    color: var(--color-white); /* Change text color to white on hover */
+}
+
+/* Input fields styling (unchanged) */
+input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+    text-align: center; /* Centers the text */
+    width: 100%; /* Ensure full-width */
+    padding: 10px; /* Padding to improve appearance */
+    box-sizing: border-box; /* Make sure padding doesn't affect width */
+    border-radius: var(--border-radius-1); /* Match border radius with other inputs */
+    border: 1px solid var(--color-dark-variant); /* Subtle border to align with the theme */
+    font-size: 1rem; /* Font size for readability */
+    font-family: 'WorkSans', sans-serif; /* Consistent font family */
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: var(--border-radius-2); /* Match the border radius */
+    border: 1px solid var(--color-dark-variant);
+    width: 80%;
+    max-width: 500px;
+    box-shadow: var(--box-shadow); /* Add box shadow for a subtle effect */
+}
+
+.close {
+    color: var(--color-dark-variant);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--color-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-1); /* Match border radius */
+    font-size: 1rem;
+    color: var(--color-dark);
+}
+
+/* Styling for error messages or hints */
+.password-hint {
+    color: var(--color-danger);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Password input styling */
+.password-input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.password-input input {
+    width: calc(100% - 60px); /* Make room for the button */
+    padding: 8px;
+    font-size: 14px;
+    margin: 4px 0;
+    display: inline-block;
+    border-radius: var(--border-radius-1); /* Match border radius */
+}
+
+/* Styling for the button */
+.password-input button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.password-input button:hover {
+    text-decoration: underline;
+}
+
+/* Label styling */
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    color: var(--color-info-dark); /* Adjusted for better contrast */
+}
+
+/* Optional: Styling for the modal header */
+.modal-header {
+    font-family: 'WorkSans', sans-serif;
+    font-size: 1.2rem;
+    color: var(--color-dark);
+    margin-bottom: 15px;
 }
