@@ -43,9 +43,12 @@
                 <h3>Edit Lesson</h3>
                 <input type="text" id="editLessonTitle" placeholder="Lesson Title" disabled />
                 <input type="text" id="editChapterName" placeholder="Chapter Name" />
-                
+
                 <!-- Content and Image Upload by Index -->
                 <div id="editContentContainer"></div>
+
+                <!-- Add Content for Edit Mode -->
+                <button type="button" id="addEditContentButton">Add Content</button>
                 
                 <button type="submit">Save Changes</button>
                 <button type="button" id="cancelEdit">Cancel</button>
@@ -55,7 +58,7 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Chapter</th>                        
+                        <th>Chapter</th>
                         <th>Slide No.</th>
                         <th>Content</th>
                         <th>Image</th>
@@ -68,6 +71,7 @@
             </table>
         </section>
     </main>
+
     <!-- Move the script to the bottom to ensure DOM is ready -->
     <script src="scripts.js"></script>
 </body>

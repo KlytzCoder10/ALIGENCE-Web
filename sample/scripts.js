@@ -162,7 +162,7 @@ window.editLesson = (lessonTitle, index) => {
     const editForm = document.getElementById("editForm");
     const editLessonTitle = document.getElementById("editLessonTitle");
     const editChapterName = document.getElementById("editChapterName");
-    const contentContainer = document.getElementById("contentContainer");
+    const contentContainer = document.getElementById("editContentContainer");
 
     // Show the edit form
     editForm.style.display = "block";
@@ -192,6 +192,25 @@ window.editLesson = (lessonTitle, index) => {
         });
     });
 };
+
+// Add new content and image input fields for edit mode
+document.getElementById("addEditContentButton").addEventListener("click", () => {
+    const contentContainer = document.getElementById("editContentContainer");
+
+    // Create new fields for content and image URL
+    const contentDiv = document.createElement("div");
+    contentDiv.classList.add("content-item");
+
+    const index = contentContainer.querySelectorAll('.content-item').length; // Get next index for content
+
+    contentDiv.innerHTML = `
+        <h4>Content ${index + 1}</h4>
+        <textarea class="editContent" data-index="${index}" placeholder="Content"></textarea>
+        <input type="url" class="editImage" data-index="${index}" placeholder="Image URL" />
+    `;
+
+    contentContainer.appendChild(contentDiv);
+});
 
 // Save changes after editing
 document.getElementById("editForm").addEventListener("submit", (e) => {
