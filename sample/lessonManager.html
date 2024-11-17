@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Lessons Manager</h1>
+    </header>
+    <main>
+        <section id="lessonForm">
+            <h2>Add/Update Lesson</h2>
+            <form id="form">
+                <label for="lessonTitle">Select Lesson Title:</label>
+                <select id="lessonTitle" name="lessonTitle" required>
+                    <!-- Dropdown options will be populated here -->
+                </select>
+
+                <label for="chapterName">Chapter Name:</label>
+                <input type="text" id="chapterName" name="chapterName" required readonly>
+
+                <!-- Content and Image Upload Section -->
+                <div id="contentContainer"></div>
+
+                <!-- Button to Add New Content and Image -->
+                <button type="button" id="addContentButton">Add Content</button>
+
+                <button type="submit">Save Lesson</button>
+            </form>
+        </section>
+
+        <section id="lessonTable">
+            <!-- Add/Edit Lesson Form -->
+            <form id="editForm" style="display:none;">
+                <h3>Edit Lesson</h3>
+                <input type="text" id="editLessonTitle" placeholder="Lesson Title" disabled />
+                <input type="text" id="editChapterName" placeholder="Chapter Name" />
+                
+                <!-- Content and Image Upload by Index -->
+                <div id="editContentContainer"></div>
+                
+                <button type="submit">Save Changes</button>
+                <button type="button" id="cancelEdit">Cancel</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Chapter</th>                        
+                        <th>Slide No.</th>
+                        <th>Content</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="lessonsBody">
+                    <!-- Lessons will be populated here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <!-- Move the script to the bottom to ensure DOM is ready -->
+    <script src="scripts.js"></script>
+</body>
+</html>
