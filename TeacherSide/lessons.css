@@ -233,7 +233,7 @@ td {
     color: #1C5A05;
 }
 
-.modal {
+/* .modal {
     display: none; 
     position: fixed; 
     z-index: 1;
@@ -259,7 +259,7 @@ td {
 
 .modal-content a{
     font-size: 14px;
-}
+} */
 
 .btnViewResults{
     font-family: 'WorkSans';
@@ -351,4 +351,129 @@ input.radio-button{
 
 .export-btn:hover {
     background-color: #45a049;
+}
+
+/* Modal style */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+    backdrop-filter: blur(5px); /* Add a blur effect */
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: var(--color-background); /* Use the predefined background color */
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: var(--border-radius-2); /* Smooth corners */
+    width: 90%; /* Default width for mobile */
+    max-width: 600px; /* Maximum width for larger screens */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-family: 'WorkSans', sans-serif;
+    position: relative; /* For close button positioning */
+}
+
+.modal-content h3, .modal-content h2 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    text-align: center;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--color-dark-variant);
+}
+
+.modal-content input, 
+.modal-content select {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-dark-variant);
+    border-radius: var(--border-radius-1);
+    font-size: 1rem;
+    outline: none;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 3px rgba(115, 128, 236, 0.5);
+}
+
+.btnModal {
+    /* display: inline-block;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius-1);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0.5rem; */
+    color: #C3EEB3;
+    min-width: 100px;
+    margin: 0.5rem;
+    border: 1.5px solid #1C5A05;
+    border-radius: 5px;
+}
+
+.btnModal:hover {
+    background-color: var(--color-primary-variant);
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-danger);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #ff0000;
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .btnModal {
+        width: 100%; /* Full-width buttons for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content h2, .modal-content h3 {
+        font-size: 1.2rem;
+    }
 }
