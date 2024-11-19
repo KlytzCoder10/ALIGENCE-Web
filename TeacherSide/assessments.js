@@ -16,26 +16,6 @@ const database = firebase.database();
 
 let currentTopic = "";
 
-// Function to select a topic and load questions
-// function selectTopic(topic) {
-//     currentTopic = topic;
-//     document.getElementById("topic-btn").innerText = topic;
-//     loadQuestions();
-// }
-
-// Example: set currentTopic before calling loadResults()
-// function selectTopic(topic) {
-//     if (!topic) {
-//         console.error("Error: Topic is undefined.");
-//         return;
-//     }
-//     currentTopic = topic;
-//     document.getElementById("topic-btn").innerText = topic;
-//     loadQuestions();
-//     console.log("Selected Topic:", selectedTopic);  // Add this line for debugging
-//     loadResults(currentTopic); // Ensuring the selected topic is passed
-// }
-
 function selectTopic(topic) {
     if (!topic) {
         console.error("Error: Topic is undefined.");

@@ -47,6 +47,7 @@
                 </a>
             </div>
         </aside>
+        
         <main>
             <div class="header">
                 <h2>Assessments</h2>
@@ -136,9 +137,9 @@
     <div id="viewResultsModal" class="modal">        
         <div class="modal-content">
             <h3>Student Results</h3>
-            <button onclick="exportTableToExcel('tableResults', 'scores_GradedQuiz')" class="export-btn">
+            <button onclick="exportTableToExcel('tableResults', 'scores_GradedQuiz')" class="export-btn" aria-readonly="true">
                 <i class="fa fa-file-export"></i>
-            </button>             
+            </button>          
             <span class="close" onclick="closeResultsModal()">&times;</span>         
             <table class="tableResults" id="tableResults">
                 <thead>
