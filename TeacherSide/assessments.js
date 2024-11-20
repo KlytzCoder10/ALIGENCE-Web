@@ -255,15 +255,42 @@ function loadResults() {
 }
 
 //EXPORT TO EXCEL
-function exportTableToExcel(tableId, filename = 'excel_data') {
-    // Get the table element by ID
+// function exportTableToExcel(tableId, filename = 'excel_data') {
+//     // Get the table element by ID
+//     const table = document.getElementById(tableId);
+//     const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
+//     // Use XLSX to write the workbook to a binary string
+//     XLSX.writeFile(workbook, `${filename}.xlsx`);
+// }
+
+function exportTableToPDF(tableId, filename = 'assessment') {
+    const { jsPDF } = window.jspdf;
+
+    // Create a new jsPDF instance
+    const pdf = new jsPDF();
+
+    // Add header with "Assessment" and the current date
+    const headerText = "Assessment";
+    const currentDate = new Date().toLocaleDateString();
+    pdf.setFontSize(12);
+    pdf.text(`${headerText} - ${currentDate}`, 10, 10); // x=10, y=10 for positioning
+
+    // Fetch the table element
     const table = document.getElementById(tableId);
-    const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
-    // Use XLSX to write the workbook to a binary string
-    XLSX.writeFile(workbook, `${filename}.xlsx`);
+
+    // AutoTable Plugin to add table contents to the PDF
+    pdf.autoTable({
+        html: table, // Use the table element directly
+        startY: 20, // Start after header
+        theme: 'grid', // Table theme
+        headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Style for the header
+        bodyStyles: { fontSize: 10 },
+        styles: { halign: 'center', valign: 'middle' },
+    });
+
+    // Save the PDF
+    pdf.save(`${filename}.pdf`);
 }
-
-
 
 function logout() {
     // Firebase sign-out

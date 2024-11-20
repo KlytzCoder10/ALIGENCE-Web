@@ -10,6 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- PDF EXPORT -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <link rel="stylesheet" href="assessments.css">
     <link rel="stylesheet" href="sidebar.css">
 </head>
@@ -137,7 +140,8 @@
     <div id="viewResultsModal" class="modal">        
         <div class="modal-content">
             <h3>Student Results</h3>
-            <button onclick="exportTableToExcel('tableResults', 'scores_GradedQuiz')" class="export-btn" aria-readonly="true">
+            <!-- <button onclick="exportTableToExcel('tableResults', 'scores_GradedQuiz')" class="export-btn" aria-readonly="true"> -->
+            <button onclick="exportTableToPDF('tableResults', 'scores_GradedQuiz')" class="export-btn" aria-readonly="true">
                 <i class="fa fa-file-export"></i>
             </button>          
             <span class="close" onclick="closeResultsModal()">&times;</span>         
