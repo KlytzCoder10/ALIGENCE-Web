@@ -269,11 +269,15 @@ function exportTableToPDF(tableId, filename = 'assessment') {
     // Create a new jsPDF instance
     const pdf = new jsPDF();
 
-    // Add header with "Assessment" and the current date
-    const headerText = "Assessment";
-    const currentDate = new Date().toLocaleDateString();
-    pdf.setFontSize(12);
-    pdf.text(`${headerText} - ${currentDate}`, 10, 10); // x=10, y=10 for positioning
+    // Format current date and time
+    const currentDate = new Date().toLocaleString(); // This will give the format: MM/DD/YYYY, HH:MM:SS AM/PM
+
+    // Add header with "Assessments - Graded Quiz" and the current date & time
+    const headerText = "Assessments - Graded Quiz";
+    pdf.setFontSize(14);
+    pdf.text(headerText, 10, 10); // x=10, y=10 for positioning
+    pdf.setFontSize(10);
+    pdf.text(`Generated on: ${currentDate}`, 10, 15); // Date and time below the header
 
     // Fetch the table element
     const table = document.getElementById(tableId);
@@ -281,7 +285,7 @@ function exportTableToPDF(tableId, filename = 'assessment') {
     // AutoTable Plugin to add table contents to the PDF
     pdf.autoTable({
         html: table, // Use the table element directly
-        startY: 20, // Start after header
+        startY: 25, // Start after header
         theme: 'grid', // Table theme
         headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Style for the header
         bodyStyles: { fontSize: 10 },
@@ -291,6 +295,7 @@ function exportTableToPDF(tableId, filename = 'assessment') {
     // Save the PDF
     pdf.save(`${filename}.pdf`);
 }
+
 
 function logout() {
     // Firebase sign-out
