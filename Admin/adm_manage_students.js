@@ -80,56 +80,75 @@ function saveStudent(e) {
     const firstName = firstNameInput.value.trim();
     const section = modalSectionText.textContent.trim();
 
-    // Password for Firebase Authentication (you can create your own logic to generate or get it)
-    const password = "defaultPassword123"; // You may want to prompt the user to provide a password
-
     if (section === "Select Section") {
         alert("Please select a section.");
         return;
     }
 
-    const studentData = {
-        studentNum: studentNum,
-        email: email,
-        lastName: lastName,
-        firstName: firstName,
-        section: section,
-        role: "student" // Assign role as student
-    };
+    // Check if the email or studentNum already exists in the database
+    database.ref('users').once('value')
+        .then(snapshot => {
+            let emailExists = false;
+            let studentNumExists = false;
 
-    // If we are editing an existing student
-    if (editKey) {
-        database.ref('users/' + editKey).update(studentData)
-            .then(() => {
-                alert("Student updated successfully.");
-                closeModalFn();
-                renderTable();
-            })
-            .catch((error) => {
-                alert("Failed to update student: " + error.message);
+            snapshot.forEach(childSnapshot => {
+                const student = childSnapshot.val();
+                if (student.email === email && (!editKey || childSnapshot.key !== editKey)) {
+                    emailExists = true;
+                }
+                if (student.studentNum === studentNum && (!editKey || childSnapshot.key !== editKey)) {
+                    studentNumExists = true;
+                }
             });
-    } else {
-        // Adding a new student
-        // create a user in Firebase Authentication
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                const userId = userCredential.user.uid; // Get the UID from Firebase Authentication
 
-                // Store the student data in Realtime Database using the UID as the key
-                database.ref('users/' + userId).set(studentData)
+            if (emailExists) {
+                alert("The email address is already in use.");
+                return Promise.reject("Validation failed: email exists.");
+            }
+
+            if (studentNumExists) {
+                alert("The student number is already in use.");
+                return Promise.reject("Validation failed: studentNum exists.");
+            }
+
+            // Proceed to save or update the student
+            const studentData = {
+                studentNum: studentNum,
+                email: email,
+                lastName: lastName,
+                firstName: firstName,
+                section: section,
+                role: "student" // Assign role as student
+            };
+
+            if (editKey) {
+                // Update existing student
+                return database.ref('users/' + editKey).update(studentData)
+                    .then(() => {
+                        alert("Student updated successfully.");
+                        closeModalFn();
+                        renderTable();
+                    });
+            } else {
+                // Create a new student
+                const password = "defaultPassword123"; // Or implement password generation logic
+                return firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(userCredential => {
+                        const userId = userCredential.user.uid;
+                        return database.ref('users/' + userId).set(studentData);
+                    })
                     .then(() => {
                         alert("Student added successfully.");
                         closeModalFn();
                         renderTable();
-                    })
-                    .catch((error) => {
-                        alert("Failed to add student data in the database: " + error.message);
                     });
-            })
-            .catch((error) => {
-                alert("Failed to create Firebase Authentication user: " + error.message);
-            });
-    }
+            }
+        })
+        .catch(error => {
+            if (error !== "Validation failed: email exists." && error !== "Validation failed: studentNum exists.") {
+                alert("Failed to save student: " + error.message);
+            }
+        });
 }
 
 // Restrict studentNum input to numbers only

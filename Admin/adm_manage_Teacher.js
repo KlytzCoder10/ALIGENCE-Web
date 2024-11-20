@@ -61,48 +61,83 @@ function closeModalFn() {
 // Function to save or add teacher data
 function saveTeacher(e) {
     e.preventDefault();
-    const teacherNum = teacherNumInput.value.trim(); 
+
+    const teacherNum = teacherNumInput.value.trim();
     const email = teacherEmailInput.value.trim();
     const lastName = teacherLastNameInput.value.trim();
     const firstName = teacherFirstNameInput.value.trim();
     const password = "defaultPassword123"; // Temporary password
 
     const teacherData = {
-        teacherNum: teacherNum, 
+        teacherNum: teacherNum,
         email: email,
         lastName: lastName,
         firstName: firstName,
         role: "teacher"
     };
 
-    if (editKey) {
-        database.ref('users/' + editKey).update(teacherData)
-            .then(() => {
-                alert("Teacher updated successfully.");
-                closeModalFn();
-                renderTable();
-            })
-            .catch((error) => {
-                alert("Failed to update teacher: " + error.message);
+    // Validate if email or teacherNum already exists
+    database.ref('users').once('value')
+        .then((snapshot) => {
+            let emailExists = false;
+            let teacherNumExists = false;
+
+            snapshot.forEach((childSnapshot) => {
+                const teacher = childSnapshot.val();
+
+                // Skip the current teacher if editing
+                if (editKey && childSnapshot.key === editKey) return;
+
+                if (teacher.email === email) {
+                    emailExists = true;
+                }
+
+                if (teacher.teacherNum === teacherNum) {
+                    teacherNumExists = true;
+                }
             });
-    } else {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                const userId = userCredential.user.uid;
-                database.ref('users/' + userId).set(teacherData)
+
+            if (emailExists || teacherNumExists) {
+                let errorMessage = "The following errors occurred:\n";
+                if (emailExists) errorMessage += "- Email is already in use.\n";
+                if (teacherNumExists) errorMessage += "- Teacher ID is already in use.\n";
+                alert(errorMessage);
+                return; // Exit the function to prevent saving
+            }
+
+            // Proceed with saving/updating
+            if (editKey) {
+                database.ref('users/' + editKey).update(teacherData)
                     .then(() => {
-                        alert("Teacher added successfully.");
+                        alert("Teacher updated successfully.");
                         closeModalFn();
                         renderTable();
                     })
                     .catch((error) => {
-                        alert("Failed to add teacher data: " + error.message);
+                        alert("Failed to update teacher: " + error.message);
                     });
-            })
-            .catch((error) => {
-                alert("Failed to create teacher: " + error.message);
-            });
-    }
+            } else {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        const userId = userCredential.user.uid;
+                        database.ref('users/' + userId).set(teacherData)
+                            .then(() => {
+                                alert("Teacher added successfully.");
+                                closeModalFn();
+                                renderTable();
+                            })
+                            .catch((error) => {
+                                alert("Failed to add teacher data: " + error.message);
+                            });
+                    })
+                    .catch((error) => {
+                        alert("Failed to create teacher: " + error.message);
+                    });
+            }
+        })
+        .catch((error) => {
+            alert("Error checking database: " + error.message);
+        });
 }
 
 // Function to render the teachers table
