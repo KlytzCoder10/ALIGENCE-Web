@@ -118,22 +118,55 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-//EXPORT TO EXCEL
-function exportTableToExcel(tableId, filename = 'excel_data') {
-    // Select the table element
+// //EXPORT TO EXCEL
+// function exportTableToExcel(tableId, filename = 'excel_data') {
+//     // Select the table element
+//     const table = document.getElementById(tableId);
+
+//     // Create a workbook and add the table data
+//     const workbook = XLSX.utils.book_new();
+//     const worksheet = XLSX.utils.table_to_sheet(table);
+
+//     // Append the worksheet to the workbook
+//     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+//     // Generate Excel file and prompt the user to download it
+//     XLSX.writeFile(workbook, `${filename}.xlsx`);
+// }
+
+//Export PDF
+async function exportTableToPDF(tableId, filename = 'table_data') {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Get the current date and time
+    const now = new Date();
+    const currentDateTime = now.toLocaleString(); // Format: "MM/DD/YYYY, HH:MM:SS AM/PM"
+
+    // Add header
+    doc.setFontSize(16);
+    doc.text("Monitor Students", 14, 15); // Title text at x=14, y=15
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${currentDateTime}`, 14, 22); // Date/time text at x=14, y=22
+
+    // Select the table
     const table = document.getElementById(tableId);
 
-    // Create a workbook and add the table data
-    const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.table_to_sheet(table);
+    // Convert table to a 2D array for autoTable
+    const rows = Array.from(table.rows).map(row =>
+        Array.from(row.cells).map(cell => cell.innerText)
+    );
 
-    // Append the worksheet to the workbook
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    // Add autoTable with the extracted data
+    doc.autoTable({
+        startY: 30, // Start after the header
+        head: [rows[0]], // First row as header
+        body: rows.slice(1), // Remaining rows as body
+    });
 
-    // Generate Excel file and prompt the user to download it
-    XLSX.writeFile(workbook, `${filename}.xlsx`);
+    // Save the PDF file
+    doc.save(`${filename}.pdf`);
 }
-
 
 function logout() {
     // Firebase sign-out

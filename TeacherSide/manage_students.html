@@ -12,6 +12,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+    <!-- Export PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.27/jspdf.plugin.autotable.min.js"></script>
     <link rel="stylesheet" href="manage_students.css">
     <link rel="stylesheet" href="sidebar.css">
 </head>
@@ -72,8 +76,9 @@
                         <input class="search-input" type="search" placeholder="Search Here" id="searchInput">
                     </div>
                 </form>
-                <button onclick="exportTableToExcel('studentsTable', 'list_Students')" class="export-btn">
-                    <i class="fa fa-file-export"></i>
+                <!-- <button onclick="exportTableToExcel('studentsTable', 'list_Students')" class="export-btn"> -->
+                <button onclick="exportTableToPDF('studentsTable', 'list_Students')" class="export-btn">
+                <i class="fa fa-file-export"></i>
                 </button>    
             </div>
             <div>

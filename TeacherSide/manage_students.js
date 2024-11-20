@@ -324,43 +324,101 @@ function logout() {
 //   }
   
 
-function exportTableToExcel(tableId, filename = 'list_Students') {
+// function exportTableToExcel(tableId, filename = 'list_Students') {
+//     const table = document.getElementById(tableId);
+//     const rows = table.querySelectorAll('tr');
+    
+//     const data = [];
+    
+//     // Loop through each row (skipping the header row)
+//     rows.forEach((row, rowIndex) => {
+//       const rowData = [];
+//       const cells = row.querySelectorAll('th, td');
+      
+//       cells.forEach((cell, cellIndex) => {
+//         // Skip the last column (Action column) by checking if it's the last column
+//         if (cellIndex !== cells.length - 1) {
+//           if (cellIndex === 1) { // LRN column (2nd column)
+//             rowData.push(`'${cell.textContent.trim()}`); // Add single quote to treat as string
+//           } else {
+//             rowData.push(cell.textContent.trim());
+//           }
+//         }
+//       });
+      
+//       // Skip the header row
+//       if (rowIndex !== 0) {
+//         data.push(rowData);
+//       }
+//     });
+  
+//     // Create a new workbook
+//     const ws = XLSX.utils.aoa_to_sheet([["#","LRN","Last Name","First Name","Section","Email"], ...data]);
+//     const wb = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(wb, ws, "Students");
+  
+//     // Write the file
+//     XLSX.writeFile(wb, `${filename}.xlsx`);
+//   }
+
+async function exportTableToPDF(tableId, filename = 'list_Students.pdf') {
+    // Get the table element
     const table = document.getElementById(tableId);
     const rows = table.querySelectorAll('tr');
-    
+
+    // Prepare data for the PDF
     const data = [];
-    
-    // Loop through each row (skipping the header row)
     rows.forEach((row, rowIndex) => {
-      const rowData = [];
-      const cells = row.querySelectorAll('th, td');
-      
-      cells.forEach((cell, cellIndex) => {
-        // Skip the last column (Action column) by checking if it's the last column
-        if (cellIndex !== cells.length - 1) {
-          if (cellIndex === 1) { // LRN column (2nd column)
-            rowData.push(`'${cell.textContent.trim()}`); // Add single quote to treat as string
-          } else {
-            rowData.push(cell.textContent.trim());
-          }
-        }
-      });
-      
-      // Skip the header row
-      if (rowIndex !== 0) {
+        const rowData = [];
+        const cells = row.querySelectorAll('th, td');
+
+        cells.forEach((cell, cellIndex) => {
+            // Skip the last column (Action column)
+            if (cellIndex !== cells.length - 1) {
+                rowData.push(cell.textContent.trim());
+            }
+        });
+
+        // Add rows to data (include header and body)
         data.push(rowData);
-      }
     });
-  
-    // Create a new workbook
-    const ws = XLSX.utils.aoa_to_sheet([["#","LRN","Last Name","First Name","Section","Email"], ...data]);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Students");
-  
-    // Write the file
-    XLSX.writeFile(wb, `${filename}.xlsx`);
-  }
-  
+
+    // Initialize jsPDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Get current date and time
+    const now = new Date();
+    const currentDateTime = now.toLocaleString(); // Format: "MM/DD/YYYY, HH:MM:SS AM/PM"
+
+    // Add title to PDF
+    doc.setFontSize(16);
+    doc.text("List of Students", 14, 20);
+
+    // Add date and time below the title
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${currentDateTime}`, 14, 27);
+
+    // Add the table to the PDF
+    doc.autoTable({
+        head: [data[0]], // Table header
+        body: data.slice(1), // Table body
+        startY: 35, // Adjust start position below title and date
+    });
+
+    // Save the PDF as read-only
+    const pdfOutput = doc.output("arraybuffer");
+    const blob = new Blob([pdfOutput], { type: "application/pdf" });
+
+    // Save the PDF file
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+
+    // Clean up
+    URL.revokeObjectURL(link.href);
+}  
 
 // Run the initializePage function on load
 window.onload = initializePage;
